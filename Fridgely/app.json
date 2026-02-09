@@ -35,6 +35,9 @@
     "owner": "p_rad",
     "cli": {
       "appVersionSource": "local"
-    }
+    },
+    "plugins": [
+      "expo-asset"
+    ]
   }
 }
