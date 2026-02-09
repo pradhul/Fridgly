@@ -9,10 +9,6 @@ export type InventoryItem = {
   detectedAs?: string;
 };
 
-export const initialInventory: InventoryItem[] = [
-  { id: '1', name: 'Broccoli', emoji: '🥦', confirmed: true, source: 'manual' },
-  { id: '2', name: 'Tomatoes', emoji: '🍅', confirmed: true, source: 'manual' },
-  { id: '3', name: 'Lemon', emoji: '🍋', confirmed: true, source: 'manual' },
-  { id: '4', name: 'Greek Yogurt', emoji: '🥛', confirmed: false, source: 'manual' },
-];
+/** Start with empty; pantry loads from DB on app init. */
+export const initialInventory: InventoryItem[] = [];
 

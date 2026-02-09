@@ -88,23 +88,23 @@ export async function savePantryItem(item: InventoryItem): Promise<void> {
 
 export async function savePantryItems(items: InventoryItem[]): Promise<void> {
   const database = await getDb();
-  await database.withTransactionAsync(async () => {
-    for (const item of items) {
-      await database.runAsync(
-        `INSERT OR REPLACE INTO pantry (id, name, emoji, source, confidence, detected_as, confirmed, created_at)
-         VALUES ($id, $name, $emoji, $source, $confidence, $detected_as, $confirmed, COALESCE((SELECT created_at FROM pantry WHERE id = $id), datetime('now')))`,
-        {
-          $id: item.id,
-          $name: item.name,
-          $emoji: item.emoji,
-          $source: item.source ?? null,
-          $confidence: item.confidence ?? null,
-          $detected_as: item.detectedAs ?? null,
-          $confirmed: item.confirmed ? 1 : 0,
-        }
-      );
-    }
-  });
+  // Run each INSERT outside a transaction to avoid "transaction within a transaction"
+  // when other code (e.g. sync, saveFeedback) uses the same DB concurrently.
+  for (const item of items) {
+    await database.runAsync(
+      `INSERT OR REPLACE INTO pantry (id, name, emoji, source, confidence, detected_as, confirmed, created_at)
+       VALUES ($id, $name, $emoji, $source, $confidence, $detected_as, $confirmed, COALESCE((SELECT created_at FROM pantry WHERE id = $id), datetime('now')))`,
+      {
+        $id: item.id,
+        $name: item.name,
+        $emoji: item.emoji,
+        $source: item.source ?? null,
+        $confidence: item.confidence ?? null,
+        $detected_as: item.detectedAs ?? null,
+        $confirmed: item.confirmed ? 1 : 0,
+      }
+    );
+  }
 }
 
 export async function deletePantryItem(id: string): Promise<void> {

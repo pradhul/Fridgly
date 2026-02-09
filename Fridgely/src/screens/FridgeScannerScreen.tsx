@@ -15,7 +15,6 @@ import { spacing } from '../theme/spacing';
 import { IconButton } from '../components/IconButton';
 import { PrimaryButton } from '../components/PrimaryButton';
 import { scanPhotosForIngredients } from '../services/scanner';
-import { useAppContext } from '../context/AppContext';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'FridgeScanner'>;
 
@@ -24,7 +23,6 @@ export const FridgeScannerScreen: React.FC<Props> = ({ navigation }) => {
   const cameraRef = useRef<CameraView | null>(null);
   const [photos, setPhotos] = useState<{ id: string; uri: string }[]>([]);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const { applyScanResults } = useAppContext();
 
   useEffect(() => {
     if (!permission) {
@@ -59,8 +57,7 @@ export const FridgeScannerScreen: React.FC<Props> = ({ navigation }) => {
     try {
       const uris = photos.map((p) => p.uri);
       const detected = await scanPhotosForIngredients(uris);
-      applyScanResults(detected);
-      navigation.navigate('InventoryList');
+      navigation.navigate('InventoryList', { scanResults: detected });
     } catch (error) {
       console.warn('Failed to analyze photos', error);
     } finally {

@@ -4,12 +4,13 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { BottomTabs } from './BottomTabs';
 import { FridgeScannerScreen } from '../screens/FridgeScannerScreen';
 import { InventoryListScreen } from '../screens/InventoryListScreen';
+import type { DetectedItem } from '../services/scanner';
 import { RecipeDetailsScreen } from '../screens/RecipeDetailsScreen';
 
 export type RootStackParamList = {
   Tabs: undefined;
   FridgeScanner: undefined;
-  InventoryList: undefined;
+  InventoryList: { scanResults: DetectedItem[] } | undefined;
   RecipeDetails: { recipeId: string } | undefined;
 };
 

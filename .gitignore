@@ -1,4 +1,20 @@
+# Firebase secret (never commit)
 fridgely-83ed4-firebase-adminsdk-fbsvc-8b60d5a3f9.json
+
+# Scraper outputs / generated data
 fridgely-scrapper/indianhealthyrecipes_urls_auto.txt
 fridgely-scrapper/indianhealthyrecipes_recipes.json
 fridgely-scrapper/indianhealthyrecipes_urls.txt
+
+# Python venv
+fridgely-scrapper/.venv312/
+fridgely-scrapper/.venv/
+
+# YOLO export artifacts (script writes .tflite to Fridgely/modal/)
+fridgely-scrapper/yolov8n_saved_model/
+fridgely-scrapper/yolov8n.pt
+fridgely-scrapper/yolov8n.onnx
+fridgely-scrapper/*.npy
+
+# macOS
+.DS_Store

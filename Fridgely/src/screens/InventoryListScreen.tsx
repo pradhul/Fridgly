@@ -14,10 +14,31 @@ import { spacing } from '../theme/spacing';
 import { useAppContext } from '../context/AppContext';
 import { IconButton } from '../components/IconButton';
 import { PrimaryButton } from '../components/PrimaryButton';
-import { saveFeedback } from '../services/DatabaseService';
+import { deletePantryItem, saveFeedback } from '../services/DatabaseService';
+import { syncFeedbackToBackend } from '../services/SyncService';
+import type { DetectedItem } from '../services/scanner';
 import type { InventoryItem } from '../data/mockInventory';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'InventoryList'>;
+
+function detectedToInventoryItem(d: DetectedItem): InventoryItem {
+  const emoji =
+    d.category === 'vegetable' ? '🥦'
+    : d.category === 'fruit' ? '🍎'
+    : d.category === 'dairy' ? '🥛'
+    : d.category === 'protein' ? '🍗'
+    : d.category === 'grain' ? '🍞'
+    : '❓';
+  return {
+    id: `scan-${d.id}`,
+    name: d.name,
+    emoji,
+    confirmed: d.confidence >= 0.95,
+    source: 'scan',
+    confidence: d.confidence,
+    detectedAs: d.name,
+  };
+}
 
 function logFeedback(
   item: InventoryItem,
@@ -31,23 +52,38 @@ function logFeedback(
     corrected_to: correctedTo,
     confidence,
     correct,
-  }).catch((e) => console.warn('Save feedback failed', e));
+  })
+    .then(() => syncFeedbackToBackend())
+    .catch((e) => console.warn('Save feedback failed', e));
 }
 
-export const InventoryListScreen: React.FC<Props> = ({ navigation }) => {
+const DEFAULT_MANUAL_EMOJI = '📦';
+
+export const InventoryListScreen: React.FC<Props> = ({ navigation, route }) => {
   const { inventory, setInventory } = useAppContext();
+  const scanResults = route.params?.scanResults;
+  const isScanSession = scanResults !== undefined;
+
+  const [localList, setLocalList] = useState<InventoryItem[]>(() =>
+    isScanSession ? (scanResults ?? []).map(detectedToInventoryItem) : [],
+  );
+
+  const list = isScanSession ? localList : inventory;
+  const setList = isScanSession ? setLocalList : setInventory;
 
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editingValue, setEditingValue] = useState('');
+  const [showAddManual, setShowAddManual] = useState(false);
+  const [manualItemName, setManualItemName] = useState('');
 
   const toggleConfirm = (id: string) => {
-    const item = inventory.find((i) => i.id === id);
+    const item = list.find((i) => i.id === id);
     const nextConfirmed = item ? !item.confirmed : true;
     if (item && nextConfirmed && (item.source === 'scan' || item.detectedAs)) {
       logFeedback(item, item.name, true);
     }
-    setInventory(
-      inventory.map((i) =>
+    setList(
+      list.map((i) =>
         i.id === id ? { ...i, confirmed: nextConfirmed } : i,
       ),
     );
@@ -65,16 +101,61 @@ export const InventoryListScreen: React.FC<Props> = ({ navigation }) => {
       setEditingId(null);
       return;
     }
-    const item = inventory.find((i) => i.id === editingId);
+    const item = list.find((i) => i.id === editingId);
     if (item && (item.source === 'scan' || item.detectedAs) && name !== (item.detectedAs ?? item.name)) {
       logFeedback(item, name, false);
     }
-    setInventory(
-      inventory.map((i) =>
+    setList(
+      list.map((i) =>
         i.id === editingId ? { ...i, name } : i,
       ),
     );
     setEditingId(null);
+  };
+
+  const removeItem = (id: string) => {
+    if (!isScanSession) {
+      deletePantryItem(id).catch((e) => console.warn('Delete pantry item failed', e));
+    }
+    setList(list.filter((i) => i.id !== id));
+  };
+
+  const addManualItem = () => {
+    const name = manualItemName.trim();
+    if (!name) return;
+    const newItem: InventoryItem = {
+      id: `manual-${Date.now()}`,
+      name,
+      emoji: DEFAULT_MANUAL_EMOJI,
+      confirmed: true,
+      source: 'manual',
+    };
+    setList([...list, newItem]);
+    setManualItemName('');
+    setShowAddManual(false);
+  };
+
+  const handleFindRecipes = () => {
+    if (isScanSession && localList.length > 0) {
+      setInventory((prev) => {
+        const byName = (n: string) =>
+          prev.find((i) => i.name.trim().toLowerCase() === n.trim().toLowerCase());
+        const updated = [...prev];
+        for (const item of localList) {
+          const existing = byName(item.name);
+          if (existing) {
+            const idx = updated.findIndex((i) => i.id === existing.id);
+            if (idx !== -1) {
+              updated[idx] = { ...existing, ...item, id: existing.id };
+            }
+          } else {
+            updated.push(item);
+          }
+        }
+        return updated;
+      });
+    }
+    navigation.navigate('Tabs', { screen: 'Recipes' } as never);
   };
 
   return (
@@ -91,9 +172,15 @@ export const InventoryListScreen: React.FC<Props> = ({ navigation }) => {
         </View>
 
         <FlatList
-          data={inventory}
+          data={list}
           keyExtractor={(item) => item.id}
-          contentContainerStyle={{ paddingBottom: spacing['2xl'] }}
+          contentContainerStyle={{ paddingBottom: spacing['2xl'], flexGrow: 1 }}
+          ListEmptyComponent={
+            <View style={styles.emptyState}>
+              <Text style={styles.emptyStateText}>No items detected.</Text>
+              <Text style={styles.emptyStateSubtext}>Add them below.</Text>
+            </View>
+          }
           renderItem={({ item }) => (
             <View style={styles.card}>
               <View style={styles.cardLeft}>
@@ -130,19 +217,49 @@ export const InventoryListScreen: React.FC<Props> = ({ navigation }) => {
                   )}
                 </View>
               </View>
-              <PrimaryButton
-                label={item.confirmed ? 'Confirmed' : 'Add'}
-                onPress={() => toggleConfirm(item.id)}
-                style={item.confirmed ? styles.cardButtonConfirmed : styles.cardButton}
-              />
+              <View style={styles.cardActions}>
+                <PrimaryButton
+                  label={item.confirmed ? 'Confirmed' : 'Add'}
+                  onPress={() => toggleConfirm(item.id)}
+                  style={item.confirmed ? styles.cardButtonConfirmed : styles.cardButton}
+                />
+                <IconButton
+                  name="delete"
+                  onPress={() => removeItem(item.id)}
+                  color={colors.danger}
+                  style={styles.removeButton}
+                />
+              </View>
             </View>
           )}
         />
 
+        {showAddManual ? (
+          <View style={styles.addManualRow}>
+            <TextInput
+              style={styles.manualInput}
+              value={manualItemName}
+              onChangeText={setManualItemName}
+              placeholder="e.g. Milk, Eggs"
+              placeholderTextColor={colors.textSecondary}
+              autoFocus
+              onSubmitEditing={addManualItem}
+            />
+            <IconButton name="check" onPress={addManualItem} />
+            <IconButton name="close" onPress={() => { setShowAddManual(false); setManualItemName(''); }} />
+          </View>
+        ) : (
+          <PrimaryButton
+            label="Add item not in the list"
+            onPress={() => setShowAddManual(true)}
+            style={styles.addManualTrigger}
+          />
+        )}
+
         <View style={styles.footer}>
           <PrimaryButton
             label="Find recipes"
-            onPress={() => navigation.navigate('Tabs', { screen: 'Recipes' } as never)}
+            onPress={handleFindRecipes}
           />
         </View>
       </View>
@@ -230,6 +347,48 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.lg,
     paddingVertical: spacing.sm,
     backgroundColor: '#dcfce7',
+  },
+  cardActions: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.xs,
+  },
+  removeButton: {
+    marginLeft: spacing.xs,
+  },
+  addManualRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.sm,
+    marginBottom: spacing.md,
+    paddingVertical: spacing.sm,
+  },
+  manualInput: {
+    flex: 1,
+    fontSize: 16,
+    color: colors.textPrimary,
+    paddingVertical: spacing.sm,
+    paddingHorizontal: spacing.md,
+    borderWidth: 1,
+    borderColor: colors.borderMuted,
+    borderRadius: 12,
+  },
+  emptyState: {
+    paddingVertical: spacing['2xl'],
+    alignItems: 'center',
+  },
+  emptyStateText: {
+    fontSize: 16,
+    color: colors.textSecondary,
+    marginBottom: spacing.xs,
+  },
+  emptyStateSubtext: {
+    fontSize: 14,
+    color: colors.textSecondary,
+  },
+  addManualTrigger: {
+    marginBottom: spacing.md,
+    backgroundColor: colors.chipBackground,
   },
   footer: {
     paddingBottom: spacing.lg,

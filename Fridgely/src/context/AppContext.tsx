@@ -6,7 +6,8 @@ import { fetchRecipesFromFirebase } from '../services/recipes';
 import type { DetectedItem } from '../services/scanner';
 import { clearScannerCache } from '../services/scanner';
 import { checkForModelUpdate } from '../services/ModelUpdateService';
-import { scheduleFeedbackSync } from '../services/SyncService';
+import { scheduleFeedbackSync, syncFeedbackToBackend } from '../services/SyncService';
+import { verifyFirebaseConnection } from '../services/firebase';
 
 type AppContextValue = {
   inventory: InventoryItem[];
@@ -50,6 +51,14 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   useEffect(() => {
     if (!dbReady) return;
+    (async () => {
+      const result = await verifyFirebaseConnection();
+      if (result.ok) {
+        if (__DEV__) console.log('[Firebase] Connected — feedback/training data will sync to Firestore.');
+      } else {
+        console.warn('[Firebase] Not ready for training data sync:', result.error);
+      }
+    })();
     const cancelSync = scheduleFeedbackSync();
     return cancelSync;
   }, [dbReady]);

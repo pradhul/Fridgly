@@ -61,6 +61,19 @@ export type ImageTensor = {
   data: Float32Array;
 };
 
+function tensorStats(data: Float32Array): { min: number; max: number; mean: number } {
+  let min = data[0] ?? 0;
+  let max = data[0] ?? 0;
+  let sum = 0;
+  for (let i = 0; i < data.length; i++) {
+    const v = data[i] ?? 0;
+    if (v < min) min = v;
+    if (v > max) max = v;
+    sum += v;
+  }
+  return { min, max, mean: sum / data.length };
+}
+
 /**
  * Load image from file URI (e.g. from expo-camera takePictureAsync), decode JPEG,
  * resize to TARGET_SIZE x TARGET_SIZE, normalize to [0,1], return NHWC tensor.
@@ -72,15 +85,26 @@ export async function imageUriToTensor(uri: string): Promise<ImageTensor | null>
     });
     const bytes = base64ToUint8Array(base64);
     const decoded = jpeg.decode(bytes, { useTArray: true });
-    if (!decoded?.data || !decoded.width || !decoded.height) return null;
+    if (!decoded?.data || !decoded.width || !decoded.height) {
+      if (__DEV__) console.log('[scanner] imageUriToTensor: decode failed or empty image');
+      return null;
+    }
 
     const { data, width, height } = decoded;
+    if (__DEV__) {
+      console.log('[scanner] imageUriToTensor: decoded', width, 'x', height, 'pixels');
+    }
     const rgbFloat = resizeRgbaToRgb(data, width, height, TARGET_SIZE, TARGET_SIZE);
+    const stats = tensorStats(rgbFloat);
+    if (__DEV__) {
+      console.log('[scanner] imageUriToTensor: input tensor', TARGET_SIZE, 'x', TARGET_SIZE, 'x 3, stats min:', stats.min.toFixed(3), 'max:', stats.max.toFixed(3), 'mean:', stats.mean.toFixed(3));
+    }
     return {
       shape: [1, TARGET_SIZE, TARGET_SIZE, 3],
       data: rgbFloat,
     };
-  } catch {
+  } catch (e) {
+    if (__DEV__) console.warn('[scanner] imageUriToTensor failed', e);
     return null;
   }
 }
