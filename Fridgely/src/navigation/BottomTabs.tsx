@@ -1,5 +1,8 @@
 import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {
+  createBottomTabNavigator,
+  type BottomTabScreenProps,
+} from '@react-navigation/bottom-tabs';
 import { MaterialIcons } from '@expo/vector-icons';
 import { colors } from '../theme/colors';
 import { HomeDashboardScreen } from '../screens/HomeDashboardScreen';
@@ -15,6 +18,10 @@ export type TabParamList = {
 };
 
 const Tab = createBottomTabNavigator<TabParamList>();
+
+type TabScreenComponent<T extends keyof TabParamList> = React.ComponentType<
+  BottomTabScreenProps<TabParamList, T>
+>;
 
 export const BottomTabs: React.FC = () => {
   return (
@@ -40,8 +47,14 @@ export const BottomTabs: React.FC = () => {
         },
       })}
     >
-      <Tab.Screen name="Home" component={HomeDashboardScreen} />
-      <Tab.Screen name="Recipes" component={RecipeSuggestionsScreen} />
+      <Tab.Screen
+        name="Home"
+        component={HomeDashboardScreen as unknown as TabScreenComponent<'Home'>}
+      />
+      <Tab.Screen
+        name="Recipes"
+        component={RecipeSuggestionsScreen as unknown as TabScreenComponent<'Recipes'>}
+      />
       <Tab.Screen
         name="Grocery"
         component={PlaceholderScreen}

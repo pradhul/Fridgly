@@ -21,10 +21,20 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.p_rad.Fridgely"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "86f52168-90e5-43a7-8776-a2a746511b98"
+      }
+    },
+    "owner": "p_rad",
+    "cli": {
+      "appVersionSource": "local"
     }
   }
 }
