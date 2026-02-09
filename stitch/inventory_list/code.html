@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Inventory List</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2bee6c",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102216",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white antialiased">
+<div class="relative flex h-screen w-full max-w-[430px] mx-auto flex-col overflow-hidden bg-background-light dark:bg-background-dark border-x border-slate-200 dark:border-slate-800 shadow-2xl">
+<!-- Top App Bar -->
+<header class="sticky top-0 z-10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
+<div class="flex items-center p-4 pb-2 justify-between">
+<button class="text-slate-900 dark:text-white flex size-12 shrink-0 items-center justify-center rounded-full hover:bg-slate-200 dark:hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-tight flex-1 text-center pr-12">Inventory List</h2>
+</div>
+<div class="px-6 py-2">
+<h4 class="text-slate-500 dark:text-primary/70 text-xs font-bold uppercase tracking-widest text-center">Confirm what we found in your fridge</h4>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto px-4 py-2 space-y-3 hide-scrollbar pb-32">
+<!-- Scanned Item Card 1 -->
+<div class="flex items-center gap-4 bg-white dark:bg-white/5 p-4 rounded-xl border border-slate-100 dark:border-white/5 shadow-sm">
+<div class="text-primary flex items-center justify-center rounded-lg bg-primary/10 shrink-0 size-12">
+<span class="material-symbols-outlined text-3xl">energy_savings_leaf</span>
+</div>
+<div class="flex flex-col flex-1 justify-center">
+<p class="text-slate-900 dark:text-white text-base font-bold leading-tight">Organic Spinach</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium">Detected from scan</p>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center justify-center rounded-lg size-9 bg-primary/20 text-primary hover:bg-primary transition-colors hover:text-white">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</button>
+<button class="flex items-center justify-center rounded-lg size-9 bg-red-500/10 text-red-500 hover:bg-red-500 transition-colors hover:text-white">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+</div>
+<!-- Scanned Item Card 2 -->
+<div class="flex items-center gap-4 bg-white dark:bg-white/5 p-4 rounded-xl border border-slate-100 dark:border-white/5 shadow-sm">
+<div class="text-primary flex items-center justify-center rounded-lg bg-primary/10 shrink-0 size-12">
+<span class="material-symbols-outlined text-3xl">nutrition</span>
+</div>
+<div class="flex flex-col flex-1 justify-center">
+<p class="text-slate-900 dark:text-white text-base font-bold leading-tight">Carrots</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium">Detected from scan</p>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center justify-center rounded-lg size-9 bg-primary/20 text-primary hover:bg-primary transition-colors hover:text-white">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</button>
+<button class="flex items-center justify-center rounded-lg size-9 bg-red-500/10 text-red-500 hover:bg-red-500 transition-colors hover:text-white">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+</div>
+<!-- Scanned Item Card 3 -->
+<div class="flex items-center gap-4 bg-white dark:bg-white/5 p-4 rounded-xl border border-slate-100 dark:border-white/5 shadow-sm">
+<div class="text-primary flex items-center justify-center rounded-lg bg-primary/10 shrink-0 size-12">
+<span class="material-symbols-outlined text-3xl">egg</span>
+</div>
+<div class="flex flex-col flex-1 justify-center">
+<p class="text-slate-900 dark:text-white text-base font-bold leading-tight">Whole Eggs</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium">Detected from scan</p>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center justify-center rounded-lg size-9 bg-primary/20 text-primary hover:bg-primary transition-colors hover:text-white">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</button>
+<button class="flex items-center justify-center rounded-lg size-9 bg-red-500/10 text-red-500 hover:bg-red-500 transition-colors hover:text-white">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+</div>
+<!-- Scanned Item Card 4 (Confirmed State Example) -->
+<div class="flex items-center gap-4 bg-primary/5 dark:bg-primary/5 p-4 rounded-xl border border-primary/20 shadow-sm">
+<div class="text-primary flex items-center justify-center rounded-lg bg-primary/10 shrink-0 size-12">
+<span class="material-symbols-outlined text-3xl">skillet</span>
+</div>
+<div class="flex flex-col flex-1 justify-center">
+<p class="text-slate-900 dark:text-white text-base font-bold leading-tight">Bell Peppers</p>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">verified</span>
+<p class="text-primary text-xs font-bold uppercase">Confirmed</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center justify-center rounded-lg size-9 bg-slate-200 dark:bg-white/10 text-slate-400">
+<span class="material-symbols-outlined text-[20px]">undo</span>
+</button>
+</div>
+</div>
+<!-- Scanned Item Card 5 -->
+<div class="flex items-center gap-4 bg-white dark:bg-white/5 p-4 rounded-xl border border-slate-100 dark:border-white/5 shadow-sm">
+<div class="text-primary flex items-center justify-center rounded-lg bg-primary/10 shrink-0 size-12">
+<span class="material-symbols-outlined text-3xl">restaurant</span>
+</div>
+<div class="flex flex-col flex-1 justify-center">
+<p class="text-slate-900 dark:text-white text-base font-bold leading-tight">Greek Yogurt</p>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium">Detected from scan</p>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center justify-center rounded-lg size-9 bg-primary/20 text-primary hover:bg-primary transition-colors hover:text-white">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</button>
+<button class="flex items-center justify-center rounded-lg size-9 bg-red-500/10 text-red-500 hover:bg-red-500 transition-colors hover:text-white">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+</div>
+<!-- Add Item Manually Button -->
+<button class="w-full flex items-center justify-center gap-2 py-4 mt-4 border-2 border-dashed border-slate-200 dark:border-white/10 rounded-xl text-slate-500 dark:text-slate-400 font-bold hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined">add_circle</span>
+<span>Add Item Manually</span>
+</button>
+</main>
+<!-- Fixed Footer Actions -->
+<footer class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-background-light via-background-light/95 to-transparent dark:from-background-dark dark:via-background-dark/95 dark:to-transparent">
+<button class="w-full bg-primary text-slate-900 font-extrabold text-lg py-4 rounded-xl shadow-[0_8px_30px_rgb(43,238,108,0.3)] hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3">
+<span class="material-symbols-outlined font-bold">search_spark</span>
+                Find Recipes
+            </button>
+<div class="mt-4 flex justify-center">
+<div class="w-32 h-1 bg-slate-300 dark:bg-white/20 rounded-full"></div>
+</div>
+</footer>
+</div>
+</body></html>

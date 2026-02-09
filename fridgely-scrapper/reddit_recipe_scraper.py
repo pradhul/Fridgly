@@ -129,7 +129,13 @@ def scrape_subreddit(reddit, subreddit_name):
                 'created_at': datetime.fromtimestamp(post.created_utc).isoformat(),
                 'top_comments': comments,
                 'source': f"r/{subreddit_name}",
-                'credit': f"Original post by u/{post.author}" if post.author else "r/" + subreddit_name
+                'credit': f"Original post by u/{post.author}" if post.author else "r/" + subreddit_name,
+                # App-level user feedback fields (start empty, filled by your app)
+                'user_likes': 0,
+                'user_dislikes': 0,
+                'user_rating': 0.0,      # average rating (e.g. 0–5 stars)
+                'total_ratings': 0,      # how many ratings contributed to user_rating
+                'user_comments': [],     # list of comment objects your app can append
             }
             
             recipes.append(recipe)

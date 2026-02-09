@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Home Dashboard - Healthy Chef</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2bee6c",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102216",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen pb-24">
+<!-- Header Section -->
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-4 pt-6 pb-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-cover bg-center border-2 border-primary" data-alt="User profile photo of a smiling person" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCs3NS_OCE08kdCj0hhNUCGYYdlxfs4uOCUy9IWXTCVZg0P6u-pYrC9TI1LzR27QkfdYhovNuvY440bXGp4gTb0lOrcV0R8dX_oeqLuTef1r1baCL7ClOCxP-2rAhnPIu1GSTW6ivNBtitWNW_LI3rG5JITIShgmlfyB6ux66I4LzxGbuSO_k5Lkd5s26UoNOix1TG-h_JKCOr3BpwaV_DTATGGNSkEqkIzjbDr6a7k38f1mk-P1EsRlK_VX59A7rEOIq3s_CaJBmA')"></div>
+<div>
+<p class="text-xs font-medium opacity-60">Good morning,</p>
+<h2 class="text-base font-bold leading-none">Chef Alex</h2>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="size-10 flex items-center justify-center rounded-full bg-slate-200 dark:bg-white/10">
+<span class="material-symbols-outlined text-[22px]">notifications</span>
+</button>
+</div>
+</div>
+</header>
+<main class="max-w-md mx-auto">
+<!-- Hero Section -->
+<section class="px-4 py-6">
+<h1 class="text-3xl font-extrabold tracking-tight mb-6">What's in your fridge?</h1>
+<!-- Scan Button -->
+<button class="w-full relative group overflow-hidden rounded-3xl bg-primary p-1 shadow-lg shadow-primary/20 active:scale-95 transition-transform duration-100">
+<div class="flex flex-col items-center justify-center py-10 px-6 rounded-[22px] bg-primary text-background-dark border border-white/20">
+<div class="size-16 rounded-full bg-background-dark flex items-center justify-center mb-4 shadow-inner">
+<span class="material-symbols-outlined text-primary text-4xl">photo_camera</span>
+</div>
+<span class="text-xl font-extrabold">Scan Fridge</span>
+<p class="text-sm font-medium opacity-70 mt-1">AI will detect your ingredients</p>
+</div>
+</button>
+</section>
+<!-- Manual Entry -->
+<section class="px-4 py-4">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="w-full h-14 pl-12 pr-4 rounded-2xl border-none bg-slate-100 dark:bg-white/5 focus:ring-2 focus:ring-primary/50 text-base font-medium placeholder:text-slate-400 transition-all" placeholder="Add ingredients manually..." type="text"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 bg-white dark:bg-white/10 size-8 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+</div>
+</section>
+<!-- Healthy Picks Carousel -->
+<section class="py-6">
+<div class="flex items-center justify-between px-4 mb-4">
+<h2 class="text-xl font-bold">Healthy Picks for You</h2>
+<button class="text-primary text-sm font-bold">See all</button>
+</div>
+<div class="flex gap-4 overflow-x-auto px-4 hide-scrollbar">
+<!-- Recipe Card 1 -->
+<div class="flex-none w-[260px]">
+<div class="relative h-[340px] rounded-3xl overflow-hidden mb-3">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Healthy bowl with salmon and avocado" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuACAt3HquIG5-ryyEQfj3sGMsAXgILXIOxUqOLhKohSGN6sGzsr_tzRi1vq5CQhx3f-jUIxRHwYlRr0gB-DO4qZAM9_pbLXCK5QKTEww-VXVb3sjD_X1OMvWvRFPbRV3-VBfJc_C-YAT8itBMGPeijm_4_GrTVt5ny93k30nWDzh7T217ytvNUo205jPCDT58L92_6s9xT-VO_qEUjDE9DqU0xWQVwz2SJbnLynaMM50BcIeMlPCX3iimERU-UQ1rD3N7btF-b37F4')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+<div class="absolute top-4 left-4 flex gap-2">
+<span class="bg-primary/90 text-background-dark text-[10px] font-extrabold px-2 py-1 rounded-full uppercase tracking-wider">Top Rated</span>
+</div>
+<div class="absolute bottom-4 left-4 right-4">
+<div class="flex items-center gap-3 text-white/80 text-xs mb-1">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">schedule</span> 15 min</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">local_fire_department</span> 320 kcal</span>
+</div>
+<h3 class="text-white text-lg font-bold leading-snug">Avocado &amp; Salmon Power Bowl</h3>
+</div>
+</div>
+</div>
+<!-- Recipe Card 2 -->
+<div class="flex-none w-[260px]">
+<div class="relative h-[340px] rounded-3xl overflow-hidden mb-3">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Fresh Mediterranean salad with chickpeas" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCQPYSF8Nv406TPOd6k1oE35DvYwT5SyhzqPAA5KFBQhClNyDOAh589MqMRISyWnNX3Xr_JVIbg_vtTE-B96OpXR72kJwYOyJj6iX5DlRJm6SlXta9s1RyyqTSDTq9j4Wn5t-XHOlVczzm66FKwLktSIGBGZOcrKSJSInOGTL3kfC165Ub4itXa8UssDdtlfcXzbInR44MoTfffpNUL1zY9LWfhB_vQZiq08g7L33Q086FzmbB8xK3geKNrGkD3dlYx8rEERNnEUOY')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+<div class="absolute top-4 left-4">
+<span class="bg-primary/90 text-background-dark text-[10px] font-extrabold px-2 py-1 rounded-full uppercase tracking-wider">High Fiber</span>
+</div>
+<div class="absolute bottom-4 left-4 right-4">
+<div class="flex items-center gap-3 text-white/80 text-xs mb-1">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">schedule</span> 10 min</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">local_fire_department</span> 210 kcal</span>
+</div>
+<h3 class="text-white text-lg font-bold leading-snug">Mediterranean Chickpea Salad</h3>
+</div>
+</div>
+</div>
+<!-- Recipe Card 3 -->
+<div class="flex-none w-[260px]">
+<div class="relative h-[340px] rounded-3xl overflow-hidden mb-3">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Roasted vegetables with pesto" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDli6XXjBO2LcOur4rPSwDVHRBeM3LHXPKfM4Ea-pDj-xrw5uyxGOecgo9ysOxZBN1ewn47SYxstodJ8dTicqpNugURUCbnrbfbmppQ6aJb2rcuPFUcypemnrCwtRv654-Bz-ruphbs5uG_Mx9TRkGms2m2uLAUZSSLLl-ArO_4QwteF8cVq-00RLucfFwV41A3Nkvem4fnI3mMPTF0sR8R1kvUUwx3JuZvwykB2IYTRIkgGCBhpE_zUAiofhI6o92hqw72-AJW2ak')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+<div class="absolute bottom-4 left-4 right-4">
+<div class="flex items-center gap-3 text-white/80 text-xs mb-1">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">schedule</span> 25 min</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">local_fire_department</span> 450 kcal</span>
+</div>
+<h3 class="text-white text-lg font-bold leading-snug">Roasted Veggie Pesto Medley</h3>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Quick Stats / Badges -->
+<section class="px-4 py-4 grid grid-cols-2 gap-4">
+<div class="bg-primary/10 dark:bg-primary/5 p-4 rounded-3xl border border-primary/20">
+<span class="material-symbols-outlined text-primary mb-2">restaurant</span>
+<p class="text-sm font-medium opacity-60">Recipes made</p>
+<p class="text-2xl font-extrabold text-primary">24</p>
+</div>
+<div class="bg-slate-100 dark:bg-white/5 p-4 rounded-3xl border border-transparent dark:border-white/5">
+<span class="material-symbols-outlined text-slate-400 mb-2">eco</span>
+<p class="text-sm font-medium opacity-60">Eco-Score</p>
+<p class="text-2xl font-extrabold text-slate-800 dark:text-white">A+</p>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation -->
+<nav class="fixed bottom-0 left-0 right-0 bg-white/80 dark:bg-background-dark/80 backdrop-blur-xl border-t border-slate-200 dark:border-white/5 px-6 pt-3 pb-8 flex items-center justify-between z-50">
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined fill-1">home</span>
+<span class="text-[10px] font-bold">Home</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="text-[10px] font-bold">Recipes</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">shopping_basket</span>
+<span class="text-[10px] font-bold">Grocery</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">bookmark</span>
+<span class="text-[10px] font-bold">Saved</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] font-bold">Settings</span>
+</button>
+</nav>
+</body></html>

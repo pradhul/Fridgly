@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Fridge Scanner</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2bee6c",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102216",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .ar-scanner-overlay {
+            background: linear-gradient(rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 20%, rgba(0,0,0,0) 80%, rgba(0,0,0,0.5) 100%);
+        }
+        .shutter-glow {
+            box-shadow: 0 0 20px rgba(43, 238, 108, 0.4);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-white overflow-hidden">
+<!-- Main Viewport Container (Simulating Phone) -->
+<div class="relative flex h-screen w-full flex-col bg-background-dark overflow-hidden">
+<!-- Live Camera Viewfinder (Background) -->
+<div class="absolute inset-0 z-0 bg-cover bg-center" data-alt="Inside of a modern clean refrigerator with fresh vegetables" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBg1h3xFTo9jkZ_c1692Zx7DwAVG2gH0KQPEOO0Fr_BI4qiENx6gqPx60QjHKCTcUJf20NzpNCbGbsv_vrOL5JqNkEG6wzCfEaq-LYntMRfd81HYKnfWHHbjGInsYZsghUeZU8cjYAf6mxwmvcmHnZc9-sBrn0K7ka6iqW9aVGqRPzho-NwbgqsPGzIX_ADys8iiwqSXL2ewqoj6nAHaI9AkRGkNXd8kTrdQ3rnUHIKWV0B6fuTn8GMQ3KUe_6lgwAt70gP-1xj6ic');">
+<!-- AR Bounding Box: Carrots -->
+<div class="absolute top-[20%] left-[15%] w-32 h-48 border-2 border-primary rounded-lg flex flex-col justify-start items-start p-2">
+<div class="bg-primary text-background-dark text-[10px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wider mb-1">98% Match</div>
+<div class="bg-black/60 backdrop-blur-md px-2 py-1 rounded flex items-center gap-1">
+<span class="text-xs font-bold text-white uppercase tracking-tighter">Carrots</span>
+</div>
+</div>
+<!-- AR Bounding Box: Greek Yogurt -->
+<div class="absolute top-[35%] right-[20%] w-28 h-28 border-2 border-primary rounded-lg flex flex-col justify-end items-start p-2">
+<div class="bg-black/60 backdrop-blur-md px-2 py-1 rounded flex items-center gap-1">
+<span class="text-xs font-bold text-white uppercase tracking-tighter">Greek Yogurt</span>
+</div>
+<div class="bg-primary text-background-dark text-[10px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wider mt-1">Found</div>
+</div>
+<!-- AR Bounding Box: Spinach -->
+<div class="absolute bottom-[40%] left-[40%] w-36 h-24 border-2 border-primary/50 border-dashed rounded-lg flex flex-col justify-center items-center p-2">
+<div class="bg-black/40 backdrop-blur-md px-2 py-1 rounded">
+<span class="text-xs font-bold text-white/80 uppercase tracking-tighter italic">Spinach?</span>
+</div>
+</div>
+<div class="ar-scanner-overlay absolute inset-0 pointer-events-none"></div>
+</div>
+<!-- Top Navigation -->
+<div class="relative z-10 flex flex-col w-full">
+<div class="flex items-center justify-between p-4 pt-6">
+<button class="bg-black/40 backdrop-blur-md text-white rounded-full p-2 hover:bg-black/60 transition-colors">
+<span class="material-symbols-outlined leading-none">close</span>
+</button>
+<div class="flex items-center gap-2 bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-white/10">
+<span class="material-symbols-outlined text-primary text-sm">auto_awesome</span>
+<span class="text-xs font-bold uppercase tracking-widest text-white/90">AI Analysis Active</span>
+</div>
+<button class="bg-black/40 backdrop-blur-md text-white rounded-full p-2">
+<span class="material-symbols-outlined leading-none">flash_on</span>
+</button>
+</div>
+<!-- Mode Selector Toggle -->
+<div class="flex justify-center px-4 mt-2">
+<div class="flex w-64 h-11 items-center justify-center rounded-xl bg-black/60 backdrop-blur-xl p-1 border border-white/5">
+<label class="flex cursor-pointer h-full grow items-center justify-center rounded-lg px-2 has-[:checked]:bg-primary has-[:checked]:text-background-dark text-white/60 text-sm font-bold transition-all">
+<span class="truncate">Fridge</span>
+<input checked="" class="invisible w-0" name="scan-mode" type="radio" value="Fridge"/>
+</label>
+<label class="flex cursor-pointer h-full grow items-center justify-center rounded-lg px-2 has-[:checked]:bg-primary has-[:checked]:text-background-dark text-white/60 text-sm font-bold transition-all">
+<span class="truncate">Basket</span>
+<input class="invisible w-0" name="scan-mode" type="radio" value="Basket"/>
+</label>
+</div>
+</div>
+</div>
+<!-- Bottom Controls -->
+<div class="relative z-10 mt-auto w-full pb-10">
+<!-- Detected Items Horizontal Scroll -->
+<div class="flex gap-2 px-6 py-4 overflow-x-auto no-scrollbar">
+<div class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-xl bg-primary/20 backdrop-blur-md border border-primary/30 pl-3 pr-4">
+<span class="text-lg">🥕</span>
+<p class="text-white text-sm font-bold leading-normal">Carrots</p>
+<span class="material-symbols-outlined text-primary text-xs">check_circle</span>
+</div>
+<div class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-xl bg-primary/20 backdrop-blur-md border border-primary/30 pl-3 pr-4">
+<span class="text-lg">🥛</span>
+<p class="text-white text-sm font-bold leading-normal">Greek Yogurt</p>
+<span class="material-symbols-outlined text-primary text-xs">check_circle</span>
+</div>
+<div class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 pl-3 pr-4">
+<span class="text-lg">🥬</span>
+<p class="text-white text-sm font-bold leading-normal">Spinach</p>
+<span class="material-symbols-outlined text-white/40 text-xs">pending</span>
+</div>
+</div>
+<!-- Capture Actions -->
+<div class="flex items-center justify-around px-8 mt-2">
+<!-- Gallery -->
+<button class="flex shrink-0 items-center justify-center rounded-full size-12 bg-black/40 backdrop-blur-md text-white border border-white/10">
+<span class="material-symbols-outlined">photo_library</span>
+</button>
+<!-- Main Shutter Button -->
+<div class="relative flex items-center justify-center">
+<!-- Outer Ring -->
+<div class="absolute inset-0 size-20 rounded-full border-2 border-primary/50 scale-110"></div>
+<!-- Button Core -->
+<button class="relative flex shrink-0 items-center justify-center rounded-full size-20 bg-white shutter-glow group active:scale-95 transition-transform">
+<div class="size-16 rounded-full border-4 border-background-dark bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-background-dark font-bold text-3xl">restaurant</span>
+</div>
+</button>
+</div>
+<!-- Settings/Filter -->
+<button class="flex shrink-0 items-center justify-center rounded-full size-12 bg-black/40 backdrop-blur-md text-white border border-white/10">
+<span class="material-symbols-outlined">tune</span>
+</button>
+</div>
+<!-- Hint text -->
+<p class="text-center text-white/60 text-[11px] font-bold uppercase tracking-[0.2em] mt-6">
+                Tap to generate recipes
+            </p>
+</div>
+<!-- Safe Area Home Indicator -->
+<div class="relative z-20 flex justify-center pb-2">
+<div class="w-32 h-1.5 bg-white/20 rounded-full"></div>
+</div>
+</div>
+</body></html>

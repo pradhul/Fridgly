@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Recipe Suggestions</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2bee6c",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102216",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white">
+<!-- Main Container (iPhone Form Factor Simulation) -->
+<div class="relative mx-auto min-h-screen max-w-[430px] flex flex-col bg-background-light dark:bg-background-dark shadow-2xl overflow-x-hidden">
+<!-- Header -->
+<header class="sticky top-0 z-20 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-4 pt-6 pb-2">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-3xl">kitchen</span>
+<h1 class="text-xl font-bold tracking-tight">Recipe Suggestions</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-200 dark:bg-white/10">
+<span class="material-symbols-outlined text-xl">search</span>
+</button>
+</div>
+<!-- Horizontal Filter Chips -->
+<div class="flex gap-2 overflow-x-auto hide-scrollbar pb-2">
+<div class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-primary px-4 text-background-dark text-sm font-bold">
+<span class="material-symbols-outlined text-sm">check</span>
+<span>All Matches</span>
+</div>
+<div class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-slate-200 dark:bg-white/10 px-4 text-sm font-medium">
+<span>Vegan</span>
+</div>
+<div class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-slate-200 dark:bg-white/10 px-4 text-sm font-medium">
+<span>Low Carb</span>
+</div>
+<div class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-slate-200 dark:bg-white/10 px-4 text-sm font-medium">
+<span>Quick Meal</span>
+</div>
+<div class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-slate-200 dark:bg-white/10 px-4 text-sm font-medium">
+<span>Keto</span>
+</div>
+</div>
+</header>
+<!-- Recipe Feed -->
+<main class="flex-1 px-4 py-4 space-y-6">
+<!-- Recipe Card 1 -->
+<div class="group relative bg-white dark:bg-white/5 rounded-xl overflow-hidden border border-slate-100 dark:border-white/10 shadow-sm">
+<div class="relative aspect-[4/3] w-full bg-slate-200 dark:bg-white/5 bg-cover bg-center" data-alt="Gourmet salad with avocado and seeds" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB7lU6CcMuKrcCxoUd5JhDZhYS2NtrmA6-nBo-YpEOezx8DLIG6kX42dOQuO-PEvCv14T3hJ_P5YAbCImItNtgZgXUXuA6TVWVKeLcdWH5duj4girJNFzQAy9fxNK-MT0Gbt_KELKs4bCjAS7S4t_EKiMnbMzJPfKJKGq6Lbt96b-OHHKL81qHfoucTY9W8C9GjT5ER5pc45097Hc0Oz7HAi_6a-n5yfLoZkPWaKmB0SbOS25QCQNjj-5RhwqUFqJD-cYH4gAAGH6Y')">
+<div class="absolute top-3 left-3 flex items-center gap-1 bg-primary px-2.5 py-1 rounded-lg text-background-dark text-xs font-bold uppercase tracking-wider shadow-lg">
+<span class="material-symbols-outlined text-sm">bolt</span>
+<span>100% Match</span>
+</div>
+<button class="absolute top-3 right-3 w-8 h-8 flex items-center justify-center rounded-full bg-black/20 backdrop-blur-sm text-white">
+<span class="material-symbols-outlined text-lg">favorite</span>
+</button>
+</div>
+<div class="p-4">
+<h3 class="text-lg font-bold leading-tight mb-2">Roasted Root Vegetable Bowl</h3>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3 text-slate-500 dark:text-slate-400 text-sm">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-base">schedule</span>
+<span>25 min</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-base">restaurant</span>
+<span>Medium</span>
+</div>
+</div>
+<button class="h-8 px-4 bg-primary/10 text-primary rounded-lg text-sm font-bold">
+                            View
+                        </button>
+</div>
+</div>
+</div>
+<!-- Recipe Card 2 -->
+<div class="group relative bg-white dark:bg-white/5 rounded-xl overflow-hidden border border-slate-100 dark:border-white/10 shadow-sm">
+<div class="relative aspect-[4/3] w-full bg-slate-200 dark:bg-white/5 bg-cover bg-center" data-alt="Creamy green pasta with herbs" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCmITIaMxxVmt60PJvcvDWKMQNr9GotG-NIEPW2Fv_qdkcU3MQfRv3wNCrHrdSTln6Wja_bM5l3Hx0zYahWWuVb43vAvxSR21a0MLl5bJro8ODvdPwOzcGDJ_e2u8M6PNaa5qKFbeS8BYI65s4zZPxhIpHabJPTF918dVTohf20z8VHq1Q_00s1ddVDPbGvNxSfVFk_smnP8oxkSf8PBoNb5CA1EizylLxeSd0f-hJc4CFwigCaDJI0rnXXelT15dvpGZZOmKHJXy8')">
+<div class="absolute top-3 left-3 flex items-center gap-1 bg-primary/90 px-2.5 py-1 rounded-lg text-background-dark text-xs font-bold uppercase tracking-wider">
+<span class="material-symbols-outlined text-sm">bolt</span>
+<span>92% Match</span>
+</div>
+<button class="absolute top-3 right-3 w-8 h-8 flex items-center justify-center rounded-full bg-black/20 backdrop-blur-sm text-white">
+<span class="material-symbols-outlined text-lg">favorite</span>
+</button>
+</div>
+<div class="p-4">
+<h3 class="text-lg font-bold leading-tight mb-2">Creamy Pesto Avocado Pasta</h3>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3 text-slate-500 dark:text-slate-400 text-sm">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-base">schedule</span>
+<span>15 min</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-base">restaurant</span>
+<span>Easy</span>
+</div>
+</div>
+<button class="h-8 px-4 bg-primary/10 text-primary rounded-lg text-sm font-bold">
+                            View
+                        </button>
+</div>
+</div>
+</div>
+<!-- Recipe Card 3 -->
+<div class="group relative bg-white dark:bg-white/5 rounded-xl overflow-hidden border border-slate-100 dark:border-white/10 shadow-sm">
+<div class="relative aspect-[4/3] w-full bg-slate-200 dark:bg-white/5 bg-cover bg-center" data-alt="Colorful quinoa salad bowl" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCofF4BJLgt2ErV4G04C0XVhp4e0TrHfaw2Jk9oNNvHn7UdwGX5spxIi5A_1MgItmLNuomloGp91mRgRJj5Y8xbGi_bh6kCGTVobwhUoniE6aX6cNS5o7Vth0KNibXil8JMxNzdX9tJzJCaz_tOBf3S5gW4U5j49Z3hKjBDTEcqKAanMnukW3I5d0XMpPQ469BpgN7f7RMWbh16394PKuoxt_jVIQec87_9-l1TE1dMWWK_0cW7-1UNSnkAQlgNTr5KF3UiWqLGXWU')">
+<div class="absolute top-3 left-3 flex items-center gap-1 bg-primary/90 px-2.5 py-1 rounded-lg text-background-dark text-xs font-bold uppercase tracking-wider">
+<span class="material-symbols-outlined text-sm">bolt</span>
+<span>85% Match</span>
+</div>
+<button class="absolute top-3 right-3 w-8 h-8 flex items-center justify-center rounded-full bg-black/20 backdrop-blur-sm text-white">
+<span class="material-symbols-outlined text-lg">favorite</span>
+</button>
+</div>
+<div class="p-4">
+<h3 class="text-lg font-bold leading-tight mb-2">Mediterranean Quinoa Bowl</h3>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3 text-slate-500 dark:text-slate-400 text-sm">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-base">schedule</span>
+<span>10 min</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-base">restaurant</span>
+<span>Easy</span>
+</div>
+</div>
+<button class="h-8 px-4 bg-primary/10 text-primary rounded-lg text-sm font-bold">
+                            View
+                        </button>
+</div>
+</div>
+</div>
+<!-- Extra space for floating button -->
+<div class="h-20"></div>
+</main>
+<!-- Floating Scan Button (iOS Action Style) -->
+<div class="fixed bottom-24 left-1/2 -translate-x-1/2 z-30">
+<button class="flex items-center gap-2 bg-primary text-background-dark px-6 py-3.5 rounded-full font-bold shadow-xl hover:scale-105 transition-transform active:scale-95">
+<span class="material-symbols-outlined">photo_camera</span>
+<span>Scan Fridge</span>
+</button>
+</div>
+<!-- Bottom Tab Bar (iOS Style) -->
+<nav class="sticky bottom-0 z-40 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-lg border-t border-slate-200 dark:border-white/10 pb-6 pt-2">
+<div class="flex justify-around items-center px-4">
+<div class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] font-bold">Home</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="text-[10px] font-medium">Pantry</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">bookmark</span>
+<span class="text-[10px] font-medium">Saved</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-medium">Profile</span>
+</div>
+</div>
+<!-- Home Indicator (iOS) -->
+<div class="w-32 h-1.5 bg-slate-300 dark:bg-white/20 mx-auto mt-4 rounded-full"></div>
+</nav>
+</div>
+</body></html>

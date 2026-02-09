@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Recipe Details &amp; Nutrition</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2bee6c",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102216",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>body {
+    font-family: "Manrope", sans-serif
+    }
+.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+    }
+.custom-checkbox:checked {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuB8Vhv0i8rPyUwPXNGS7ER3oZUlu3-Wl4Uo-DWJwU4aoqNxfBCfriR3FUJtnfXqju8GEO4dGA8HVUgWgiREAFJKoccaTBRXLzjk_NNEJnj-EnvsbEHDiBYlxNhf_gG21pjlQVS0icsIfSJAKdNE0_i7vD7KumNiZj1120nU5e7zAiE9dUXM1Gu9FOMXHRFp0MNtugnJmFOk6HFoGm4CBpa1BJHDmnbl2tZClVLn0Xz074iAOamhCRZ3cj4rF_vkfWEveSVEzk7as74)
+    }</style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white transition-colors duration-300">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden max-w-[430px] mx-auto bg-background-light dark:bg-background-dark shadow-2xl">
+<!-- Top App Bar -->
+<div class="sticky top-0 z-50 flex items-center bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md p-4 justify-between border-b border-slate-200 dark:border-slate-800">
+<div class="flex size-10 items-center justify-center rounded-full hover:bg-slate-200 dark:hover:bg-white/10 cursor-pointer">
+<span class="material-symbols-outlined">arrow_back_ios_new</span>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-tight flex-1 text-center">Recipe Details</h2>
+<div class="flex size-10 items-center justify-center rounded-full hover:bg-slate-200 dark:hover:bg-white/10 cursor-pointer">
+<span class="material-symbols-outlined">favorite</span>
+</div>
+</div>
+<!-- Hero Section -->
+<div class="px-4 py-3">
+<div class="relative aspect-[4/3] w-full overflow-hidden rounded-xl shadow-lg bg-slate-200 dark:bg-slate-800" data-alt="A fresh gourmet green salad with grilled chicken and avocado slices" style='background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.8) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuCuHjV_SEr0SSsnCvwJK3y1QmVQ_vTKrnjDVFuVoqAGwe-uennX6hRP_qmFC5wmu3Np1mbMGWrigf4ysxxQDDWCdJ_pAsRLnQCNIxwHz1zLgEtHsbrq4-pOAQakSds36XYBz_cg3TX1f8VLfX55PECE_z3AppgIfnwBzhyX5Uzs4rH2v5T_KcdBxSeKGiyh9MfwJWvVRTn6WB_kvmm_Em-rAot2JZfkUb0eSI_3hpZdAJE8a_UyoVvQXgxHEN-QeSk2FzcojPaEjuk"); background-size: cover; background-position: center;'>
+<div class="absolute bottom-0 left-0 p-5 w-full">
+<div class="flex gap-2 mb-2">
+<span class="px-2 py-1 rounded bg-primary text-background-dark text-[10px] font-bold uppercase tracking-wider">Healthy</span>
+<span class="px-2 py-1 rounded bg-white/20 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-wider">25 Mins</span>
+</div>
+<h1 class="text-white text-3xl font-extrabold leading-tight">Grilled Chicken &amp; Avocado Salad</h1>
+</div>
+</div>
+</div>
+<!-- Nutritional Info Section -->
+<div class="px-4 py-4">
+<h3 class="text-sm font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-3 ml-1">Nutritional Info</h3>
+<div class="grid grid-cols-2 gap-3 sm:grid-cols-4">
+<div class="flex flex-col gap-1 rounded-xl p-4 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10">
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium">Calories</p>
+<p class="text-primary text-xl font-bold">450 <span class="text-[10px] font-normal opacity-70">kcal</span></p>
+</div>
+<div class="flex flex-col gap-1 rounded-xl p-4 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10">
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium">Protein</p>
+<p class="text-primary text-xl font-bold">30 <span class="text-[10px] font-normal opacity-70">g</span></p>
+</div>
+<div class="flex flex-col gap-1 rounded-xl p-4 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10">
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium">Carbs</p>
+<p class="text-primary text-xl font-bold">15 <span class="text-[10px] font-normal opacity-70">g</span></p>
+</div>
+<div class="flex flex-col gap-1 rounded-xl p-4 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10">
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium">Fats</p>
+<p class="text-primary text-xl font-bold">22 <span class="text-[10px] font-normal opacity-70">g</span></p>
+</div>
+</div>
+</div>
+<!-- Ingredients Section -->
+<div class="px-4 py-4">
+<div class="flex items-center justify-between mb-3 ml-1">
+<h3 class="text-sm font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400">Ingredients</h3>
+<span class="text-xs text-primary font-bold">6 items</span>
+</div>
+<div class="space-y-2">
+<label class="group flex items-center gap-3 p-4 rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/5 cursor-pointer hover:border-primary/50 transition-colors">
+<input class="custom-checkbox h-6 w-6 rounded border-slate-300 dark:border-slate-700 bg-transparent text-primary focus:ring-primary focus:ring-offset-0 transition-all cursor-pointer" type="checkbox"/>
+<span class="text-slate-800 dark:text-slate-100 text-base font-medium group-has-[:checked]:line-through group-has-[:checked]:opacity-50 transition-all">200g Grilled Chicken Breast</span>
+</label>
+<label class="group flex items-center gap-3 p-4 rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/5 cursor-pointer hover:border-primary/50 transition-colors">
+<input class="custom-checkbox h-6 w-6 rounded border-slate-300 dark:border-slate-700 bg-transparent text-primary focus:ring-primary focus:ring-offset-0 transition-all cursor-pointer" type="checkbox"/>
+<span class="text-slate-800 dark:text-slate-100 text-base font-medium group-has-[:checked]:line-through group-has-[:checked]:opacity-50 transition-all">1 Ripe Avocado</span>
+</label>
+<label class="group flex items-center gap-3 p-4 rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/5 cursor-pointer hover:border-primary/50 transition-colors">
+<input class="custom-checkbox h-6 w-6 rounded border-slate-300 dark:border-slate-700 bg-transparent text-primary focus:ring-primary focus:ring-offset-0 transition-all cursor-pointer" type="checkbox"/>
+<span class="text-slate-800 dark:text-slate-100 text-base font-medium group-has-[:checked]:line-through group-has-[:checked]:opacity-50 transition-all">100g Mixed Salad Greens</span>
+</label>
+<label class="group flex items-center gap-3 p-4 rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/5 cursor-pointer hover:border-primary/50 transition-colors">
+<input class="custom-checkbox h-6 w-6 rounded border-slate-300 dark:border-slate-700 bg-transparent text-primary focus:ring-primary focus:ring-offset-0 transition-all cursor-pointer" type="checkbox"/>
+<span class="text-slate-800 dark:text-slate-100 text-base font-medium group-has-[:checked]:line-through group-has-[:checked]:opacity-50 transition-all">10 Cherry Tomatoes</span>
+</label>
+</div>
+</div>
+<!-- Step-by-Step Guide Section -->
+<div class="px-4 py-4 mb-24">
+<h3 class="text-sm font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-4 ml-1">Cooking Guide</h3>
+<div class="relative space-y-6 before:absolute before:left-4 before:top-2 before:h-[calc(100%-16px)] before:w-0.5 before:bg-slate-200 dark:before:bg-slate-800">
+<div class="relative flex gap-4 pl-10">
+<div class="absolute left-0 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-background-dark text-sm font-black shadow-lg shadow-primary/20">1</div>
+<div class="flex-1">
+<p class="text-slate-800 dark:text-slate-100 font-bold mb-1">Prepare the base</p>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Wash and dry the mixed salad greens. Place them in a large bowl and add the halved cherry tomatoes.</p>
+</div>
+</div>
+<div class="relative flex gap-4 pl-10">
+<div class="absolute left-0 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-slate-200 dark:bg-white/10 text-slate-500 dark:text-white text-sm font-black">2</div>
+<div class="flex-1">
+<p class="text-slate-800 dark:text-slate-100 font-bold mb-1">Slice the ingredients</p>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Slice the grilled chicken breast into 1/2-inch strips. Pit and slice the avocado into thin wedges.</p>
+</div>
+</div>
+<div class="relative flex gap-4 pl-10">
+<div class="absolute left-0 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-slate-200 dark:bg-white/10 text-slate-500 dark:text-white text-sm font-black">3</div>
+<div class="flex-1">
+<p class="text-slate-800 dark:text-slate-100 font-bold mb-1">Assemble &amp; Dress</p>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Top the greens with chicken and avocado. Drizzle with olive oil dressing and a pinch of salt and pepper.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Action Bar -->
+<div class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] p-4 bg-gradient-to-t from-background-light dark:from-background-dark via-background-light dark:via-background-dark to-transparent">
+<button class="w-full h-14 bg-primary text-background-dark font-black text-lg rounded-xl flex items-center justify-center gap-2 shadow-xl shadow-primary/30 active:scale-95 transition-transform">
+<span class="material-symbols-outlined">play_circle</span>
+                Start Cooking Mode
+            </button>
+</div>
+</div>
+</body></html>
